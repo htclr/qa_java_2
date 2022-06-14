@@ -5,7 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.internal.invocation.mockref.MockWeakReference;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,7 +31,7 @@ public class CatTest {
 
     @Test
     public void whenCatGetFoodThenFelineEatMeat() throws Exception {
-        cat.getFood();
-        Mockito.verify(feline).eatMeat();
+        Mockito.when(feline.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
+        assertEquals(List.of("Животные", "Птицы", "Рыба"),cat.getFood());
     }
 }

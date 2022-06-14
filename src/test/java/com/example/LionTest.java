@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 public class LionTest {
@@ -46,9 +47,14 @@ public class LionTest {
         assertEquals(hasMane, lion.doesHaveMane());
     }
 
-    @Test(expected = Exception.class)
-    public void lionWithInvalidSexThrowsException() throws Exception {
-        Lion lion = new Lion("Ошибка", feline);
+    @Test
+    public void lionWithInvalidSexThrowsException(){
+        try {
+            Lion lion = new Lion("Ошибка", feline);
+            assertTrue("Ожидаемого исключения при создании льва с несуществующим полом не произошло", false);
+        } catch (Exception exception){
+            assertEquals("Используйте допустимые значения пола животного - самец или самка",exception.getMessage());
+        }
     }
 
     @Test
